@@ -13,4 +13,4 @@ Métodos de operações sobre a fila a implementar:
 - Verifica se o argumento é realmente uma lista. Devolve verdadeiro ou falso. (NÃO FEITO)
 - Verifica se o argumento é uma lista VAZIA. Devolve verdadeiro ou falso. (FEITO)
 
-- Testa se duas filas são iguais. Recebe duas filas como argumento. Devolve verdadeiro ou falso. (NÃO FEITO)
+- Testa se duas filas são iguais. Recebe duas filas como argumento. Devolve verdadeiro ou falso. (FEITO)
