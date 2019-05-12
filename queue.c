@@ -1,12 +1,17 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "queue.h"
+<<<<<<< HEAD
 // funcao auxiliar (privada)
 
 static void queue_exit_error(char *msg);
+=======
 
+>>>>>>> c57cceb998b836a7de544dc1482ceb07e0a168ae
+
+// funcao auxiliar (privada)
 static void queue_exit_error(char *msg) { 
-   fprintf(stderr,"Error: %s.\n",msg);
+   fprintf(stderr,"Error: %s\n",msg);
    exit(EXIT_FAILURE);
 }
 
@@ -40,12 +45,15 @@ void free_queue(QUEUE *q) {
 }
 
 // colocar valor na fila
-void enqueue(int v, QUEUE *q) {  
-    if (queue_is_full(q) == TRUE) 
-        queue_exit_error("Queue is full.");
-
+void enqueue(int v, QUEUE *q) {
+    if (q == NULL)
+	queue_exit_error("Queue not well constructed.");
+    
     if (q -> queue == NULL) 
         queue_exit_error("Queue not well constructed.");
+    
+    if (queue_is_full(q) == TRUE) 
+        queue_exit_error("Queue is full.");
 
     if (queue_is_empty(q) == TRUE) {
         q -> start = q -> end; // fila fica com um elemento
@@ -53,23 +61,25 @@ void enqueue(int v, QUEUE *q) {
     
     q -> queue[q -> end] = v;
     q -> end = (q -> end + 1) % (q -> nMax);
-    q -> currentSize += 1;
+    q -> currentSize++;
 }
 
 // retirar valor na fila
-int dequeue(QUEUE *q) {  
-    int aux;
-    if (queue_is_empty(q) == TRUE) 
-        queue_exit_error("Can't remove element. Queue is empty.");
+int dequeue(QUEUE *q) {
+    if (q == NULL)
+	queue_exit_error("Queue not well constructed.");
 
     if (q -> queue == NULL) 
         queue_exit_error("Queue not well constructed.");
-
-    aux = q -> queue[q -> start];
-    q -> start = (q -> start + 1) % (q -> nMax);
-    q -> currentSize -= 1;
     
-    if (q -> start == q -> end) {// se só tinha um elemento
+    if (queue_is_empty(q) == TRUE) 
+        queue_exit_error("Can't remove element. Queue is empty.");
+
+    int aux = q -> queue[q -> start];
+    q -> start = (q -> start + 1) % (q -> nMax);
+    q -> currentSize--;
+    
+    if (q -> start == q -> end) { // se só tinha um elemento
         q -> start = -1; 
         q -> end = 0;
         q -> currentSize = 0;
@@ -80,7 +90,6 @@ int dequeue(QUEUE *q) {
 
 // verificar se a fila está vazia
 BOOL queue_is_empty(QUEUE *q) {
-
     if (q == NULL) 
         queue_exit_error("Queue not well constructed.");
 
@@ -99,41 +108,37 @@ BOOL queue_is_full(QUEUE *q) {
     return FALSE;
 }
 
-//seleciona/retorna o valor do primeiro elemento na fila
+// selecionar/retornar o valor do primeiro elemento na fila
 int peek_queue(QUEUE *q) {
-    if (q == NULL) {
+    if (q == NULL)
         queue_exit_error("Queue not well constructed.");
-    }
-    else if(queue_is_empty(q)) {
-        queue_exit_error("Queue is empty. Can't retrieve value");
-    }
+
+    else if (queue_is_empty(q))
+        queue_exit_error("Queue is empty. Can't retrieve value.");
 
     return q -> queue[q -> start];
 }
 
-//retorna o tamnho atual da fila
+// retornar o tamanho atual da fila
 int size(QUEUE *q) {
-    if(q == NULL) {
+    if (q == NULL)
         queue_exit_error("Queue not well constructed.");
-    }
 
     return q -> currentSize;
 }
 
-//transforma a fila numa lista
+// transformar a fila numa lista
 int* queue_to_list(QUEUE *q) {
-    if(q == NULL) {
+    if (q == NULL)
         queue_exit_error("Queue not well constructed.");
-    }
-    else if(queue_is_empty(q)) {
+    
+    else if (queue_is_empty(q))
         queue_exit_error("Queue is empty. Can't transform into list.");
-    }
 
     int s = size(q);
     int *list = malloc(s * sizeof(int));
 
-    int i;
-    for(i = 0; i < s; i++) {
+    for (int i = 0; i < s; i++) {
         list[i] = dequeue(q);
         enqueue(list[i], q);
     }
@@ -141,22 +146,23 @@ int* queue_to_list(QUEUE *q) {
     return list;
 }
 
-//verificar se o argumento se trata de uma fila. 
-//ESTA FUNÇÂO NÂO ESTÀ CORRETA.
+// verificar se o argumento se trata de uma fila. 
+// ESTA FUNÇÃO NÃO ESTÁ CORRETA.
 BOOL is_queue(QUEUE *q) {
-    if(q == NULL) {
+    if (q == NULL) {
         return FALSE;
     }
+    
     return TRUE;
 }
 
-//verifica se duas filas são iguais
+// verificar se duas filas são iguais
 BOOL queues_are_equal(QUEUE *a, QUEUE *b) {
-    if(a == NULL || b == NULL) {
+    if (a == NULL || b == NULL) {
         queue_exit_error("Queue not well constructed.");
     }
 
-    if(size(a) != size(b)) {
+    if (size(a) != size(b)) {
         return FALSE;
     }
     else {
@@ -165,9 +171,8 @@ BOOL queues_are_equal(QUEUE *a, QUEUE *b) {
         int *listA = queue_to_list(a);
         int *listB = queue_to_list(b);
 
-        int i;
-        for(i = 0; i < s; i++) {
-            if(listA[i] != listB[i]) {
+	for (int i = 0; i < s; i++) {
+            if (listA[i] != listB[i]) {
                 return FALSE;
             }
         }
