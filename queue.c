@@ -1,8 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "queue.h"
-
-#define 
 // funcao auxiliar (privada)
 
 static void queue_exit_error(char *msg);
