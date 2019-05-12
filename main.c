@@ -4,7 +4,59 @@
 
 int main() {
 
-	QUEUE *f = mk_empty_queue(3);
+    QUEUE *a = mk_empty_queue(3);
+    printf("size = %d\n", size(a));
+    printf("queue is empty = %d\n", queue_is_empty(a));
+    printf("queue is full  = %d\n", queue_is_full(a));
+    printf("\n");
+
+    enqueue(1, a);
+    printf("size = %d\n", size(a));
+    printf("queue is empty = %d\n", queue_is_empty(a));
+    printf("queue is full  = %d\n", queue_is_full(a));
+    printf("\n");
+
+    enqueue(2, a);
+    printf("size = %d\n", size(a));
+    printf("queue is empty = %d\n", queue_is_empty(a));
+    printf("queue is full  = %d\n", queue_is_full(a));
+    printf("\n");
+
+    enqueue(3, a);
+    printf("size = %d\n", size(a));
+    printf("queue is empty = %d\n", queue_is_empty(a));
+    printf("queue is full  = %d\n", queue_is_full(a));
+    printf("\n");
+    
+    QUEUE *b = mk_empty_queue(3);
+    printf("queues are equal: %d\n", queues_are_equal(a, b));
+    enqueue(1, b);
+    printf("queues are equal: %d\n", queues_are_equal(a, b));
+    enqueue(2, b);
+    printf("queues are equal: %d\n", queues_are_equal(a, b));
+    enqueue(3, b);
+    printf("queues are equal: %d\n", queues_are_equal(a, b));
+
+    printf("peek queue: %d\n", peek_queue(a));
+    int *list = queue_to_list(a);
+    printf("a = [");
+    for (int i = 0; i < size(a); i++) {
+	if (i > 0) printf(", ");
+	printf("%d", list[i]);
+    }
+    printf("]\n");
+
+    printf("queues are equal: %d\n", queues_are_equal(a, b));
+    free_queue(a);
+    a = NULL;
+    
+    printf("queues are equal: %d\n", queues_are_equal(a, b));
+
+    
+
+    
+
+    /*QUEUE *f = mk_empty_queue(3);
 	printf("%d\n", is_queue(5));
 
 	QUEUE *a = mk_empty_queue(6);
@@ -63,5 +115,5 @@ int main() {
 
 
 
-	return 0;
+	return 0;*/
 }

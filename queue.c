@@ -5,7 +5,7 @@
 
 // funcao auxiliar (privada)
 static void queue_exit_error(char *msg) { 
-   fprintf(stderr,"Error: %s.\n",msg);
+   fprintf(stderr,"Error: %s\n",msg);
    exit(EXIT_FAILURE);
 }
 
