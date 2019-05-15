@@ -146,19 +146,25 @@ BOOL queues_are_equal(QUEUE a, QUEUE b) {
     if (a == NULL || b == NULL)
         queue_exit_error("(queues_are_equal) Queue not well constructed.");
 
+    if (queue_size(a) == 0 && queue_size(b) == 0) return TRUE;
+    
     if (queue_size(a) != queue_size(b))
         return FALSE;
     else {
-        int s = queue_size(a);
+        //int s = queue_size(a);
 
-        void **listA = queue_to_list(a);
+        /*void **listA = queue_to_list(a);
         void **listB = queue_to_list(b);
 
 	for (int i = 0; i < s; i++)
             if (listA[i] != listB[i])
                 return FALSE;
 
-        return TRUE;
+		return TRUE;*/
+
+	for (int i = a->start, j = b->start; i != a->end; i = (i+1) % a->nMax, j = (j+1) % b->nMax)
+	    if (a->queue[i] != b->queue[j]) return FALSE;
+	return TRUE;
     }
 }
 

@@ -3,7 +3,7 @@
 #include "queue.h"
 
 int main() {
-
+    /*
     QUEUE a = mk_empty_queue(3);
     printf("size = %d\n", size(a));
     printf("queue is empty = %d\n", queue_is_empty(a));
@@ -51,7 +51,21 @@ int main() {
     a = NULL;
     
     printf("queues are equal: %d\n", queues_are_equal(a, b));
-
+*/
+    QUEUE m = mk_empty_queue(10);
+    QUEUE n = mk_empty_queue(10);
+    printf("equal: %d\n", queues_are_equal(m, n));
+    for (int i = 0; i < 5; i++) {
+	int *x = malloc(sizeof(int));
+	*x = i;
+	enqueue(m, x);
+	enqueue(n, x);
+    }
+    queue_print(m); printf("\n");
+    queue_print(n); printf("\n");
+    printf("equal: %d\n", queues_are_equal(m, n));
+    
+    
     
 
     
