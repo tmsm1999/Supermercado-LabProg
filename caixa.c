@@ -1,4 +1,5 @@
 #include "queue.h"
+#include "priority_queue.h"
 #include "caixa.h"
 
 
@@ -13,7 +14,7 @@
 // Devolve o objeto correspondente à caixa com o número n
 CAIXA caixa_nova(int numero) {
     CAIXA c = malloc(sizeof(CAIXA));
-    c->fila = mk_empty_queue(MAX_CLIENTES);
+    c->fila = mk_priority_queue(MAX_CLIENTES);
     c->eta = 0;
     c->clientesAtendidos = 0;
     c->produtosProcessados = 0;
@@ -51,12 +52,12 @@ void caixa_aumentaEspera(CAIXA c, int t) {
 
 // Retira um cliente da fila da caixa c
 void caixa_removeCliente(CAIXA c) {
-    dequeue(c->fila);
+    priority_queue_dequeue(c->fila);
 }
 
 
 // Devolve a fila associada à caixa c
-QUEUE caixa_fila(CAIXA c) {
+PRIORITY_QUEUE caixa_fila(CAIXA c) {
     return c->fila;
 }
 
@@ -99,12 +100,12 @@ int caixa_velocidade(CAIXA c) {
 
 // Devolve True caso a caixa c esteja vazia (sem clientes) e False caso contrário
 int caixa_vazia(CAIXA c) {
-    return queue_is_empty(c->fila);
+    return priority_queue_is_empty(c->fila);
 }
 
 
 // Imprimir uma representação textual da caixa c
 void caixa_print(CAIXA c) {
     printf("Caixa %d (%d): ", c->numero, c->eta);
-    queue_print(c->fila);
+    priority_queue_print(c->fila);
 }

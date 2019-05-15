@@ -12,9 +12,9 @@ int main() {
 
     // Caixa
     CAIXA cx = caixa_nova(5);
-    printf("queue size: %d\n", queue_size(cx->fila));
-    //enqueue((void*) c, caixa_fila(cx));
-    printf("queue size: %d\n", queue_size(cx->fila));
-    //enqueue((void*) cliente_novo(3, 5), cx->fila);
+    printf("queue size: %d\n", priority_queue_size(cx->fila));
+    priority_queue_enqueue(caixa_fila(cx), 0, (void*) c);
+    printf("queue size: %d\n", priority_queue_size(cx->fila));
+    priority_queue_enqueue(cx->fila, 1, (void*) cliente_novo(3, 5));
     caixa_print(cx); printf("\n");
 }

@@ -2,6 +2,7 @@
 #define CAIXA_H
 
 #include "queue.h"
+#include "priority_queue.h"
 #include "cliente.h"
 
 
@@ -17,7 +18,7 @@
 
 
 typedef struct {
-    QUEUE fila;
+    PRIORITY_QUEUE fila;
     int eta, clientesAtendidos, produtosProcessados, esperaTotal, numero, velocidade;
 } *CAIXA;
 
@@ -41,7 +42,7 @@ void caixa_aumentaEspera(CAIXA c, int t);
 void caixa_removeCliente(CAIXA c);
 
 // Devolve a fila associada à caixa c
-QUEUE caixa_fila(CAIXA c);
+PRIORITY_QUEUE caixa_fila(CAIXA c);
 
 // Devolve o número da caixa c
 int caixa_numero(CAIXA c);

@@ -5,7 +5,7 @@
 
 
 // funcao auxiliar (privada)
-static void queue_exit_error(char *msg) { 
+void queue_exit_error(char *msg) { 
    fprintf(stderr,"Error: %s\n",msg);
    exit(EXIT_FAILURE);
 }
@@ -40,7 +40,7 @@ void queue_free(QUEUE q) {
 }
 
 // colocar valor na fila
-void enqueue(void* v, QUEUE q) {
+void enqueue(QUEUE q, void* v) {
     if (q == NULL)
 	queue_exit_error("(enqueue) Queue not well constructed.");
     
@@ -135,7 +135,7 @@ void** queue_to_list(QUEUE q) {
 
     for (int i = 0; i < s; i++) {
         list[i] = dequeue(q);
-        enqueue(list[i], q);
+        enqueue(q, list[i]);
     }
 
     return list;

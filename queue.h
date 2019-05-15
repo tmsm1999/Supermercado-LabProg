@@ -15,10 +15,13 @@ typedef struct {
 	void **queue;
 } *QUEUE;
 
+
+void queue_exit_error(char *msg);
+
 // criar fila com capacidade para n inteiros
 QUEUE mk_empty_queue(int n);
 // colocar valor na fila
-void enqueue(void* v, QUEUE q);
+void enqueue(QUEUE q, void* v);
 // retirar valor da fila
 void* dequeue(QUEUE q);
 // verificar se a fila está vazia
