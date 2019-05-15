@@ -4,7 +4,7 @@
 
 int main() {
 
-    QUEUE *a = mk_empty_queue(3);
+    QUEUE a = mk_empty_queue(3);
     printf("size = %d\n", size(a));
     printf("queue is empty = %d\n", queue_is_empty(a));
     printf("queue is full  = %d\n", queue_is_full(a));
@@ -28,7 +28,7 @@ int main() {
     printf("queue is full  = %d\n", queue_is_full(a));
     printf("\n");
     
-    QUEUE *b = mk_empty_queue(3);
+    QUEUE b = mk_empty_queue(3);
     printf("queues are equal: %d\n", queues_are_equal(a, b));
     enqueue(1, b);
     printf("queues are equal: %d\n", queues_are_equal(a, b));
