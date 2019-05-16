@@ -14,7 +14,7 @@
 // Devolve o objeto correspondente à caixa com o número n
 CAIXA caixa_nova(int numero) {
     CAIXA c = malloc(sizeof(CAIXA));
-    c->fila = mk_priority_queue(MAX_CLIENTES);
+    c->fila = priority_queue_new(MAX_CLIENTES);
     c->eta = 0;
     c->clientesAtendidos = 0;
     c->produtosProcessados = 0;
@@ -34,7 +34,7 @@ void caixa_atualizaDisponivel(CAIXA c, int t) {
 
 // Incrementa o número de clientes atendidos na caixa c
 void caixa_incrClientes(CAIXA c) {
-    c->clientesAtendidos++;
+    (c->clientesAtendidos)++;
 }
 
 
@@ -99,13 +99,13 @@ int caixa_velocidade(CAIXA c) {
 
 
 // Devolve True caso a caixa c esteja vazia (sem clientes) e False caso contrário
-int caixa_vazia(CAIXA c) {
+BOOL caixa_vazia(CAIXA c) {
     return priority_queue_is_empty(c->fila);
 }
 
 
 // Imprimir uma representação textual da caixa c
 void caixa_print(CAIXA c) {
-    printf("Caixa %d (%d): ", c->numero, c->eta);
+    printf("- Caixa %d (pronta em %d):\n", c->numero, c->eta);
     priority_queue_print(c->fila);
 }

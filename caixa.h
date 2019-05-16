@@ -63,7 +63,7 @@ int caixa_esperaTotal(CAIXA c);
 int caixa_velocidade(CAIXA c);
 
 // Devolve True caso a caixa c esteja vazia (sem clientes) e False caso contrário
-int caixa_vazia(CAIXA c);
+BOOL caixa_vazia(CAIXA c);
 
 // Imprimir uma representação textual da caixa c
 void caixa_print(CAIXA c);

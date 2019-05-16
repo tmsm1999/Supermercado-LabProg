@@ -27,5 +27,5 @@ int cliente_tEntrada(CLIENTE c) {
 
 // Imprimir cliente em formato de texto
 void cliente_print(CLIENTE c) {
-    printf("[%d, %d]", c->nCompras, c->tEntrada);
+    printf("(%d artigo(s), chegou em %d)", c->nCompras, c->tEntrada);
 }
