@@ -24,7 +24,7 @@ typedef struct {
 
 
 // Devolve o objeto correspondente à caixa com o número n
-CAIXA caixa_nova(int numero, int numQueues);
+CAIXA caixa_nova(int numero);
 
 // Atualiza o instante em que a caixa c estará disponível para t
 void caixa_atualizaDisponivel(CAIXA c, int t);

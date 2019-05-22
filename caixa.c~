@@ -12,9 +12,9 @@
 
 
 // Devolve o objeto correspondente à caixa com o número n
-CAIXA caixa_nova(int numero, int numQueues) {
+CAIXA caixa_nova(int numero) {
     CAIXA c = malloc(sizeof(CAIXA));
-    c->fila = priority_queue_new(MAX_CLIENTES, numQueues);
+    c->fila = priority_queue_new(MAX_CLIENTES);
     c->eta = 0;
     c->clientesAtendidos = 0;
     c->produtosProcessados = 0;

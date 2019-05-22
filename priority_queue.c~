@@ -5,16 +5,12 @@
 #include "cliente.h"
 
 
-PRIORITY_QUEUE priority_queue_new(int n, int numQueues) {
+PRIORITY_QUEUE priority_queue_new(int n) {
     PRIORITY_QUEUE pq = (PRIORITY_QUEUE) malloc(sizeof(n));
-    pq->numQueues = numQueues;
+    pq -> normal = queue_new(n);
 
-    // Fila única
-    pq->normal = queue_new(n);
-
-    // Fila dupla
-    if (numQueues == 2)
-	pq->urgente = queue_new(n);
+    if (pq->numQueues == 2)
+	pq -> urgente = queue_new(n);
     
     return pq;
 }
@@ -92,7 +88,7 @@ int priority_queue_size(PRIORITY_QUEUE pq) {
     // Fila única
     if (pq->numQueues == 1)
 	return queue_size(pq->normal);
-    
+
     // Fila dupla
     return queue_size(pq -> normal) + queue_size(pq -> urgente);
 }

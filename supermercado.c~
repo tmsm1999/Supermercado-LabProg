@@ -79,80 +79,72 @@ void processa_resultados(CAIXA *lista_caixas, int nCaixas) {
 }
 
 
-void simulador(int afluencia, int apetencia, int nCaixas, int nCaixasP, int nCiclos) {
+void simulador(int afluencia, int apetencia, int nCaixas, int nCiclos) {
     srand(time(NULL));
 
-    //int probabilidade = 0, nProdutos = 0;
+    int probabilidade = 0, nProdutos = 0;
 
-    // Criar caixas
-    CAIXA lista_caixas[nCaixas+nCaixasP];
+    CAIXA lista_caixas[nCaixas];
+
+    for (int i = 0; i < nCaixas; i++)
+	lista_caixas[i] = caixa_nova(i+1);
 
     int i;
-    for (i = 0; i < nCaixas; i++)
-	lista_caixas[i] = caixa_nova(i+1, 1);
-    
-    for (int j = 0; j < nCaixasP; j++)
-	lista_caixas[i+j] = caixa_nova(i+j+1, 2);
-
-    
-    // Simulação
     for (i = 1; i <= nCiclos; i++) {
 	printf("--> CICLO %d.\n", i);
 
-	trata_clientes(i, lista_caixas, nCaixas+nCaixasP);
+	trata_clientes(i, lista_caixas, nCaixas);
 
-	int probabilidade = rand() % 101;
+	probabilidade = rand() % 101;
 	if (probabilidade <= afluencia) {
-	    int nProdutos = 1 + (rand() % (3 * apetencia));
+	    nProdutos = 1 + (rand() % (3 * apetencia));
 
 	    CLIENTE c = cliente_novo(nProdutos, i);
 	    printf("--> Criado cliente com %d produto(s).\n", nProdutos);
 
 	    // Encontrar a caixa mais vazia
 	    int caixaEscolhida = 0;
-	    for (int j = 1; j < nCaixas+nCaixasP; j++) {
+	    for (int j = 1; j < nCaixas; j++) {
 		int nClientes = priority_queue_size(caixa_fila(lista_caixas[j]));
 		if (nClientes < priority_queue_size(caixa_fila(lista_caixas[caixaEscolhida])))
 		    caixaEscolhida = j;
 	    }
 
 	    // Inserir o cliente numa das filas da caixa. Se o cliente tiver < 200 produtos, vai para a fila urgente
-	    // Se a caixa for de fila única, o cliente vai para a única fila
 	    int prioridade = (cliente_nCompras(c) < 200) ? 1 : 0;
 	    priority_queue_enqueue(caixa_fila(lista_caixas[caixaEscolhida]), prioridade, c);
 	}
 
-	mostra_caixas(lista_caixas, nCaixas+nCaixasP);
+	mostra_caixas(lista_caixas, nCaixas);
 	printf("\n\n");
     }
 
     printf("--> As caixas fecharam.\n\n\n");
 
     // Processar últimos clientes depois de as portas fecharem (começar no próximo instante)
-    while (existem_caixas_ocupadas(lista_caixas, nCaixas+nCaixasP)) {
+    while (existem_caixas_ocupadas(lista_caixas, nCaixas)) {
 	printf("--> CICLO %d.\n", i);
-	trata_clientes(i, lista_caixas, nCaixas+nCaixasP);
-	mostra_caixas(lista_caixas, nCaixas+nCaixasP);
+	trata_clientes(i, lista_caixas, nCaixas);
+	mostra_caixas(lista_caixas, nCaixas);
 	printf("\n\n");
 	i++;
     }
 
-    processa_resultados(lista_caixas, nCaixas+nCaixasP);
+    processa_resultados(lista_caixas, nCaixas);
 }
 
 
 int main(int argc, char** argv) {
 
-    if (argc < 5) {
-	fprintf(stderr, "Uso: %s afluência apetência nCaixas nCaixasPrioridade nCiclos\n", argv[0]);
+    if (argc < 4) {
+	fprintf(stderr, "Uso: %s afluência apetência nCaixas nCiclos\n", argv[0]);
 	exit(EXIT_FAILURE);
     }
     
     int afluencia = atoi(argv[1]);
     int apetencia = atoi(argv[2]);
     int nCaixas   = atoi(argv[3]);
-    int nCaixasP  = atoi(argv[4]);
-    int nCiclos   = atoi(argv[5]);
+    int nCiclos   = atoi(argv[4]);
     
-    simulador(afluencia, apetencia, nCaixas, nCaixasP, nCiclos);
+    simulador(afluencia, apetencia, nCaixas, nCiclos);
 }
