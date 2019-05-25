@@ -10,7 +10,6 @@
 */
 
 
-
 // Devolve o objeto correspondente à caixa com o número n
 CAIXA caixa_nova(int numero, int numQueues) {
     CAIXA c = malloc(sizeof(struct caixa));

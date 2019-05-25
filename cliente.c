@@ -3,6 +3,13 @@
 #include <stdlib.h>
 
 
+/*
+  === TIPO CLIENTE ===
+  
+  O tipo cliente armazena informação referente ao número de items que um cliente pretende comprar e o seu tempo de entrada.
+ */
+
+
 // Devolve um cliente com n items a comprar que foi para as caixas no instante t
 CLIENTE cliente_novo(int nCompras, int tEntrada) {
     CLIENTE c = malloc(sizeof(CLIENTE));

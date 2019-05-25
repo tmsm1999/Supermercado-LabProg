@@ -1,11 +1,24 @@
-#include "caixa.h"
-#include "cliente.h"
-#include "queue.h"
-#include "priority_queue.h"
+#include "supermercado.h"
 
-#include <time.h>
-#include <stdlib.h>
 
+
+// Arranque do programa
+int main(int argc, char** argv) {
+    if (argc < 5) {
+	fprintf(stderr, "Uso: %s afluência apetência nCaixas nCaixasPrioridade nCiclos\n", argv[0]);
+	exit(EXIT_FAILURE);
+    }
+    
+    int afluencia = atoi(argv[1]);
+    int apetencia = atoi(argv[2]);
+    int nCaixas   = atoi(argv[3]);
+    int nCaixasP  = atoi(argv[4]);
+    int nCiclos   = atoi(argv[5]);
+    
+    simulador(afluencia, apetencia, nCaixas, nCaixasP, nCiclos);
+    
+    return 0;
+}
 
 
 // Verifica se o primeiro cliente da caixa caixa_atual (caso exista) já está despachado e atualiza a informação na caixa nesse caso
@@ -82,6 +95,7 @@ void processa_resultados(CAIXA *lista_caixas, int nCaixas) {
 }
 
 
+// Iniciar o simulador de supermercado
 void simulador(int afluencia, int apetencia, int nCaixas, int nCaixasP, int nCiclos) {
     srand(time(NULL));
 
@@ -145,21 +159,4 @@ void simulador(int afluencia, int apetencia, int nCaixas, int nCaixasP, int nCic
     // Libertar memória reservadas para as caixas
     for (int i = 0; i < nCaixas+nCaixasP; i++)
 	caixa_free(lista_caixas[i]);
-}
-
-
-int main(int argc, char** argv) {
-
-    if (argc < 5) {
-	fprintf(stderr, "Uso: %s afluência apetência nCaixas nCaixasPrioridade nCiclos\n", argv[0]);
-	exit(EXIT_FAILURE);
-    }
-    
-    int afluencia = atoi(argv[1]);
-    int apetencia = atoi(argv[2]);
-    int nCaixas   = atoi(argv[3]);
-    int nCaixasP  = atoi(argv[4]);
-    int nCiclos   = atoi(argv[5]);
-    
-    simulador(afluencia, apetencia, nCaixas, nCaixasP, nCiclos);
 }

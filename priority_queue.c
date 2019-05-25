@@ -5,6 +5,7 @@
 #include "cliente.h"
 
 
+// Criar uma nova fila de prioridade
 PRIORITY_QUEUE priority_queue_new(int n, int numQueues) {
     PRIORITY_QUEUE pq = (PRIORITY_QUEUE) malloc(sizeof(n));
     pq->numQueues = numQueues;
@@ -20,6 +21,7 @@ PRIORITY_QUEUE priority_queue_new(int n, int numQueues) {
 }
 
 
+// Libertar a fila de prioridade e as estruturas a ela associadas da memória
 void priority_queue_free(PRIORITY_QUEUE pq) {
     queue_free(pq->normal);
     if (pq->numQueues == 2) queue_free(pq->urgente);
@@ -28,29 +30,28 @@ void priority_queue_free(PRIORITY_QUEUE pq) {
 }
 
 
+// Colocar o elemento mais prioritário da fila normal na fila urgente
 void priority_queue_increase_priority(PRIORITY_QUEUE pq) {
    queue_enqueue(pq -> urgente, queue_dequeue(pq -> normal));
 }
 
 
+// Introduzir um elemento com uma certa prioridade na fila
 void priority_queue_enqueue(PRIORITY_QUEUE pq, int priority, void* value) {
     // Fila simples
     if (pq->numQueues == 1)
 	queue_enqueue(pq->normal, value);
     // Fila dupla
     else {    
-	if (priority == 0) {
-	    //printf("Entrou na fila normal.\n");
+	if (priority == 0)
 	    queue_enqueue(pq -> normal, value);
-	}
-	else {
-	    //printf("Entrou na fila urgente.\n");
+	else
 	    queue_enqueue(pq -> urgente, value);
-	}
     }
 }
 
 
+// Retirar o elemento mais prioritário
 void* priority_queue_dequeue(PRIORITY_QUEUE pq) {
     // Fila simples
     if (pq->numQueues == 1) {
@@ -64,17 +65,15 @@ void* priority_queue_dequeue(PRIORITY_QUEUE pq) {
 	if (queue_is_empty(pq->normal) && queue_is_empty(pq->urgente))
 	    exit_error("Não foi possível remover o elemento; a fila está vazia.");
 	
-	if (queue_is_empty(pq -> urgente) == FALSE) {
-	    //printf("Saiu da fila urgente.\n");
+	if (queue_is_empty(pq -> urgente) == FALSE)
 	    return queue_dequeue(pq -> urgente);
-	}
 	
-	//printf("Saiu da fila normal.\n");
 	return queue_dequeue(pq -> normal);
     }
 }
 
 
+// Obter o elemento mais prioritário sem o remover
 void* priority_queue_peek(PRIORITY_QUEUE pq) {
     // Fila simples
     if (pq->numQueues == 1) {
@@ -96,6 +95,7 @@ void* priority_queue_peek(PRIORITY_QUEUE pq) {
 }
 
 
+// Obter o número de elementos da fila
 int priority_queue_size(PRIORITY_QUEUE pq) {
     // Fila única
     if (pq->numQueues == 1)
@@ -106,17 +106,13 @@ int priority_queue_size(PRIORITY_QUEUE pq) {
 }
 
 
+// Verificar se a fila de prioridade está vazia
 BOOL priority_queue_is_empty(PRIORITY_QUEUE pq) {
     return priority_queue_size(pq) == 0;
 }
 
-/*BOOL priority_queue_is_full(PRIORITY_QUEUE *pq, int nFila) {
-  if (nFila == 0) return queue_is_full(pq->normal) ? TRUE : FALSE;
-  return queue_is_full(pq->urgente) ? TRUE : FALSE;
-  }*/
 
-
-// imprimir uma representação textual da fila
+// Imprimir uma representação textual da fila de prioridade
 void priority_queue_print(PRIORITY_QUEUE pq) {
     // Fila única
     printf("    Normal:  ");

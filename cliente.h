@@ -12,14 +12,19 @@ typedef struct {
     int nCompras, tEntrada;
 } *CLIENTE;
 
+// Devolve um cliente com n items a comprar que foi para as caixas no instante t
 CLIENTE cliente_novo(int nCompras, int tEntrada);
 
+// Libertar da memória o cliente
 void cliente_free(CLIENTE c);
 
+// Devolve o número de artigos a comprar pelo cliente c
 int cliente_nCompras(CLIENTE c);
 
+// Devolve o instante em que o cliente se dirigiu às caixas
 int cliente_tEntrada(CLIENTE c);
 
+// Imprimir cliente em formato de texto
 void cliente_print(CLIENTE c);
 
 

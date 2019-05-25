@@ -4,7 +4,7 @@
 #include "cliente.h"
 
 
-// criar fila com capacidade para n inteiros
+// Criar fila com capacidade para n elementos
 QUEUE queue_new(int n) {
     QUEUE q = (QUEUE) malloc(sizeof(QUEUE));
     if (q == NULL)
@@ -23,7 +23,7 @@ QUEUE queue_new(int n) {
 }
 
 
-// libertar fila
+// Libertar fila da memória
 void queue_free(QUEUE q) {
     if (q != NULL) {
         free(q -> queue);
@@ -34,7 +34,7 @@ void queue_free(QUEUE q) {
 }
 
 
-// colocar valor na fila
+// Colocar elemento na fila
 void queue_enqueue(QUEUE q, void* v) {
     if (q == NULL)
 	exit_error("(enqueue) Fila mal construída.");
@@ -55,7 +55,7 @@ void queue_enqueue(QUEUE q, void* v) {
 }
 
 
-// retirar valor na fila
+// Retirar elemento mais antigo da fila
 void* queue_dequeue(QUEUE q) {
     if (q == NULL)
 	exit_error("(dequeue) Fila mal construída.");
@@ -80,7 +80,7 @@ void* queue_dequeue(QUEUE q) {
 }
 
 
-// selecionar/retornar o valor do primeiro elemento na fila
+// Selecionar/retornar o valor do primeiro elemento na fila
 void* queue_peek(QUEUE q) {
     if (q == NULL)
         exit_error("(queue_peek) Fila mal construída.");
@@ -92,7 +92,7 @@ void* queue_peek(QUEUE q) {
 }
 
 
-// verificar se a fila está vazia
+// Verificar se a fila está vazia
 BOOL queue_is_empty(QUEUE q) {
     if (q == NULL) 
         exit_error("(queue_is_empty) Fila mal construída.");
@@ -102,7 +102,7 @@ BOOL queue_is_empty(QUEUE q) {
 }
 
 
-// verificar se a fila não admite mais elementos
+// Verificar se a fila não admite mais elementos
 BOOL queue_is_full(QUEUE q) { 
     if (q == NULL) 
         exit_error("(queue_is_full) Fila mal construída.");
@@ -114,7 +114,7 @@ BOOL queue_is_full(QUEUE q) {
 }
 
 
-// retornar o tamanho atual da fila
+// Retornar o tamanho atual da fila
 int queue_size(QUEUE q) {
     if (q == NULL)
         exit_error("(queue_size) Fila mal construída.");
@@ -123,7 +123,7 @@ int queue_size(QUEUE q) {
 }
 
 
-// transformar a fila numa lista
+// Transformar a fila numa lista
 void** queue_to_list(QUEUE q) {
     if (q == NULL)
         exit_error("(queue_to_list) Fila mal construída.");
@@ -143,25 +143,13 @@ void** queue_to_list(QUEUE q) {
 }
 
 
-// verificar se duas filas são iguais
+// Verificar se duas filas são iguais
 BOOL queues_are_equal(QUEUE a, QUEUE b) {
     if (a == NULL || b == NULL)
         exit_error("(queues_are_equal) Fila mal construída.");
 
     if (queue_size(a) == 0 && queue_size(b) == 0) return TRUE;
-    
     if (queue_size(a) != queue_size(b)) return FALSE;
-    
-        //int s = queue_size(a);
-
-        /*void **listA = queue_to_list(a);
-        void **listB = queue_to_list(b);
-
-	for (int i = 0; i < s; i++)
-            if (listA[i] != listB[i])
-                return FALSE;
-
-		return TRUE;*/
 
     for (int i = a->start, j = b->start; i != a->end; i = (i+1) % a->nMax, j = (j+1) % b->nMax)
 	if (a->queue[i] != b->queue[j]) return FALSE;
@@ -170,13 +158,12 @@ BOOL queues_are_equal(QUEUE a, QUEUE b) {
 }
 
 
-// imprimir uma representação textual da fila
+// Imprimir uma representação textual da fila
 void queue_print(QUEUE q) {
     printf("[");
     if (queue_size(q) > 0) {
 	void ** list = queue_to_list(q);
 	for (int i = 0; i < queue_size(q); i++) {
-	    //for (int i = q->start; i != q->end; i = (i+1) % q->nMax) {
 	    if (i > 0) printf(", ");
 	    cliente_print(list[i]);
 	}

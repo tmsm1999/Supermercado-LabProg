@@ -1,7 +1,8 @@
 #ifndef ERROR_H
 #define ERROR_H
 
-// Função auxiliar (privada)
+
+// Imprimir uma mensagem de erro e abortar execução
 void exit_error(char *msg);
 
 
