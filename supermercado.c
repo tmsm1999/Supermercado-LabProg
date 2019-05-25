@@ -23,6 +23,9 @@ void trata_primeiro(int passo, CAIXA caixa_atual) {
 	caixa_aumentaEspera(caixa_atual, passo - cliente_tEntrada(cliente));
 	caixa_removeCliente(caixa_atual);
 	printf("--> Cliente atendido na caixa %d\n", caixa_numero(caixa_atual));
+
+	// Libertar o cliente da memória
+	cliente_free(cliente);
     }
 }
 
@@ -138,6 +141,10 @@ void simulador(int afluencia, int apetencia, int nCaixas, int nCaixasP, int nCic
     }
 
     processa_resultados(lista_caixas, nCaixas+nCaixasP);
+
+    // Libertar memória reservadas para as caixas
+    for (int i = 0; i < nCaixas+nCaixasP; i++)
+	caixa_free(lista_caixas[i]);
 }
 
 

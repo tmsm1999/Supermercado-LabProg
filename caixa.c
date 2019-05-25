@@ -13,7 +13,7 @@
 
 // Devolve o objeto correspondente à caixa com o número n
 CAIXA caixa_nova(int numero, int numQueues) {
-    CAIXA c = malloc(sizeof(CAIXA));
+    CAIXA c = malloc(sizeof(struct caixa));
     c->fila = priority_queue_new(MAX_CLIENTES, numQueues);
     c->eta = 0;
     c->clientesAtendidos = 0;
@@ -23,6 +23,13 @@ CAIXA caixa_nova(int numero, int numQueues) {
     c->velocidade = rand() % 5 + 1;
 
     return c;
+}
+
+
+// Liberta da memória a caixa e as estruturas associadas
+void caixa_free(CAIXA c) {
+    priority_queue_free(c->fila);
+    free(c);
 }
 
 

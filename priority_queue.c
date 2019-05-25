@@ -20,6 +20,14 @@ PRIORITY_QUEUE priority_queue_new(int n, int numQueues) {
 }
 
 
+void priority_queue_free(PRIORITY_QUEUE pq) {
+    queue_free(pq->normal);
+    if (pq->numQueues == 2) queue_free(pq->urgente);
+    
+    free(pq);
+}
+
+
 void priority_queue_increase_priority(PRIORITY_QUEUE pq) {
    queue_enqueue(pq -> urgente, queue_dequeue(pq -> normal));
 }

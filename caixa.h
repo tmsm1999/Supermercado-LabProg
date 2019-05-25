@@ -17,7 +17,7 @@
 #define MAX_CLIENTES 1000
 
 
-typedef struct {
+typedef struct caixa {
     PRIORITY_QUEUE fila;
     int eta, clientesAtendidos, produtosProcessados, esperaTotal, numero, velocidade;
 } *CAIXA;
@@ -25,6 +25,9 @@ typedef struct {
 
 // Devolve o objeto correspondente à caixa com o número n
 CAIXA caixa_nova(int numero, int numQueues);
+
+// Liberta da memória a caixa e as estruturas associadas
+void caixa_free(CAIXA c);
 
 // Atualiza o instante em que a caixa c estará disponível para t
 void caixa_atualizaDisponivel(CAIXA c, int t);

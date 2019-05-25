@@ -14,6 +14,8 @@ typedef struct {
 
 CLIENTE cliente_novo(int nCompras, int tEntrada);
 
+void cliente_free(CLIENTE c);
+
 int cliente_nCompras(CLIENTE c);
 
 int cliente_tEntrada(CLIENTE c);

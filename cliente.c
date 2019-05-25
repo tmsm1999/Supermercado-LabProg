@@ -13,6 +13,12 @@ CLIENTE cliente_novo(int nCompras, int tEntrada) {
 }
 
 
+// Libertar da memória o cliente
+void cliente_free(CLIENTE c) {
+    free(c);
+}
+
+
 // Devolve o número de artigos a comprar pelo cliente c
 int cliente_nCompras(CLIENTE c) {
     return c->nCompras;

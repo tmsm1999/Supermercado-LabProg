@@ -18,6 +18,7 @@ typedef struct {
 } *PRIORITY_QUEUE;
 
 PRIORITY_QUEUE priority_queue_new(int n, int numQueues);
+void priority_queue_free(PRIORITY_QUEUE pq);
 void priority_queue_increase_priority(PRIORITY_QUEUE pq);
 void priority_queue_enqueue(PRIORITY_QUEUE pq, int priority, void* value);
 void* priority_queue_dequeue(PRIORITY_QUEUE pq);
