@@ -11,7 +11,7 @@
 
 
 // Estrutura fila de prioridade
-typedef struct {
+typedef struct priorityqueue {
     QUEUE normal;
     QUEUE urgente;
     int size;

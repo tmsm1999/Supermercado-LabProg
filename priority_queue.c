@@ -7,7 +7,7 @@
 
 // Criar uma nova fila de prioridade
 PRIORITY_QUEUE priority_queue_new(int n, int numQueues) {
-    PRIORITY_QUEUE pq = (PRIORITY_QUEUE) malloc(sizeof(n));
+    PRIORITY_QUEUE pq = (PRIORITY_QUEUE) malloc(sizeof(struct priorityqueue));
     pq->numQueues = numQueues;
 
     // Fila única

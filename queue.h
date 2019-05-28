@@ -6,7 +6,7 @@
 typedef enum {FALSE, TRUE} BOOL;
 
 
-typedef struct {
+typedef struct queue {
     int start;
     int end;
     int nMax;

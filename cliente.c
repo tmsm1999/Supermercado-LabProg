@@ -12,7 +12,7 @@
 
 // Devolve um cliente com n items a comprar que foi para as caixas no instante t
 CLIENTE cliente_novo(int nCompras, int tEntrada) {
-    CLIENTE c = malloc(sizeof(CLIENTE));
+    CLIENTE c = malloc(sizeof(struct cliente));
     c->nCompras = nCompras;
     c->tEntrada = tEntrada;
 

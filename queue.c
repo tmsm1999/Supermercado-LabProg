@@ -6,7 +6,7 @@
 
 // Criar fila com capacidade para n elementos
 QUEUE queue_new(int n) {
-    QUEUE q = (QUEUE) malloc(sizeof(QUEUE));
+    QUEUE q = (QUEUE) malloc(sizeof(struct queue));
     if (q == NULL)
         exit_error("(mk_empty_queue) Sem memória.");
 

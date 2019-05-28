@@ -8,7 +8,7 @@
  */
 
 
-typedef struct {
+typedef struct cliente {
     int nCompras, tEntrada;
 } *CLIENTE;
 
