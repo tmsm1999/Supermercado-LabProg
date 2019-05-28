@@ -98,9 +98,7 @@ void processa_resultados(CAIXA *lista_caixas, int nCaixas) {
 // Iniciar o simulador de supermercado
 void simulador(int afluencia, int apetencia, int nCaixas, int nCaixasP, int nCiclos) {
     srand(time(NULL));
-
-    //int probabilidade = 0, nProdutos = 0;
-
+    
     // Criar caixas
     CAIXA lista_caixas[nCaixas+nCaixasP];
 
